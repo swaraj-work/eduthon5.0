@@ -428,40 +428,45 @@ return (
 
       {/* Hero Content */}
       <div className="hero-content" style={{
-        maxWidth: '900px',
+        maxWidth: isMobile ? '95%' : '900px',
         width: '100%',
         textAlign: 'center',
-        padding: '0 2rem',
+        padding: isMobile ? 'clamp(1rem, 5vw, 2rem) clamp(1rem, 4vw, 2rem)' : 'clamp(1.5rem, 5vh, 3rem) clamp(1.5rem, 5vw, 3rem)',
         position: 'relative',
         zIndex: 2,
-        transform: 'scale(0.95)',
-        transformOrigin: 'center center'
+        transform: isMobile ? 'scale(0.98)' : 'scale(0.95)',
+        transformOrigin: 'center center',
+        margin: isMobile ? '0 auto clamp(1rem, 4vh, 2rem)' : '0 auto clamp(1.5rem, 5vh, 3rem)',
+        transition: 'all 0.3s ease-in-out'
       }}>
         <h1 style={{
-          fontSize: isMobile ? 'clamp(2rem, 7vw, 3rem)' : 'clamp(2.3rem, 4vw, 3.5rem)',
+          fontSize: isMobile ? 'clamp(1.8rem, 7vw, 3rem)' : 'clamp(2.3rem, 4vw, 3.5rem)',
           fontWeight: '800',
-          marginBottom: '0.8rem',
+          marginBottom: isMobile ? 'clamp(0.5rem, 3vh, 1rem)' : 'clamp(0.8rem, 2vh, 1.5rem)',
           background: 'linear-gradient(45deg, #fff, var(--secondary-color, #FFD700))',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
-          letterSpacing: '-0.02em',
+          letterSpacing: isMobile ? '-0.01em' : '-0.02em',
           opacity: 0,
-          animation: 'fadeUp 1s forwards'
+          animation: 'fadeUp 1s forwards',
+          padding: isMobile ? '0 clamp(0.5rem, 3vw, 1.5rem)' : '0'
         }}>
           The Legacy of EDUTHON
         </h1>
 
         <p style={{
-          fontSize: isMobile ? '0.95rem' : '1.1rem',
-          maxWidth: '600px',
+          fontSize: isMobile ? 'clamp(0.85rem, 3.5vw, 1rem)' : 'clamp(0.95rem, 1.2vw, 1.2rem)',
+          maxWidth: isMobile ? '95%' : '600px',
           margin: '0 auto',
           color: 'rgba(255, 255, 255, 0.9)',
-          lineHeight: 1.5,
+          lineHeight: isMobile ? 1.4 : 1.5,
           fontWeight: '400',
           opacity: 0,
-          animation: 'fadeUp 1s forwards 0.3s'
+          animation: 'fadeUp 1s forwards 0.3s',
+          padding: isMobile ? '0 clamp(0.5rem, 3vw, 1.5rem)' : '0',
+          marginTop: isMobile ? 'clamp(0.5rem, 2vh, 1rem)' : 'clamp(0.8rem, 2vh, 1.2rem)'
         }}>
           A journey through our mission to transform education in India across four groundbreaking editions.
         </p>
@@ -484,7 +489,7 @@ return (
           marginTop: '0rem',
           marginLeft: 'auto',
           marginRight: '50%',
-          marginBottom: '2rem',
+          marginBottom: '0',
           color: '#fff',
           fontWeight: 700,
           position: 'relative',
@@ -494,94 +499,6 @@ return (
         }}>
           Explore Our Journey
         </h2>
-
-        {/* Visual edition selector with glowing edges */}
-        <div className="edition-tabs" style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: isMobile ? '1rem' : '1.5rem',
-          margin: '0 auto',
-          maxWidth: '900px'
-        }}>
-          {editions.map(edition => (
-            <button
-              key={edition.id}
-              onClick={() => handleEditionClick(edition.id)}
-              style={{
-                backgroundColor: activeEdition === edition.id
-                  ? 'rgba(20, 20, 20, 0.9)'
-                  : 'rgba(15, 15, 15, 0.7)',
-                color: activeEdition === edition.id
-                  ? edition.color
-                  : 'rgba(255, 255, 255, 0.7)',
-                border: `1px solid ${activeEdition === edition.id ? edition.color : 'rgba(255, 255, 255, 0.1)'}`,
-                borderRadius: '10px',
-                padding: isMobile ? '0.9rem 0.8rem' : '1.2rem 1.5rem',
-                fontSize: isMobile ? '0.8rem' : '0.9rem',
-                fontWeight: activeEdition === edition.id ? 600 : 500,
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                position: 'relative',
-                overflow: 'hidden',
-                flexGrow: 1,
-                flexBasis: isMobile ? '38%' : '18%',
-                maxWidth: isMobile ? '42%' : '19%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '0.5rem',
-                boxShadow: activeEdition === edition.id
-                  ? `0 10px 25px rgba(0, 0, 0, 0.25), 0 0 15px rgba(${edition.color.match(/\d+/g).join(',')}, 0.3)`
-                  : '0 5px 15px rgba(0, 0, 0, 0.15)',
-                backdropFilter: 'blur(5px)',
-                WebkitBackdropFilter: 'blur(5px)',
-                transform: 'translateY(0)',
-                fontFamily: 'Poppins, sans-serif'
-              }}
-            >
-              {activeEdition === edition.id && (
-                <span style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: `radial-gradient(circle at center, ${edition.color}25 0%, transparent 70%)`,
-                  opacity: 0.8
-                }}></span>
-              )}
-
-              <span style={{
-                position: 'relative',
-                zIndex: 1,
-                fontSize: isMobile ? '1rem' : '1.2rem',
-                fontWeight: 700
-              }}>
-                Eduthon {edition.id}.0
-              </span>
-
-              <span style={{
-                position: 'relative',
-                zIndex: 1,
-                opacity: 0.9,
-                fontSize: isMobile ? '0.7rem' : '0.8rem'
-              }}>
-                {edition.date}
-              </span>
-
-              {activeEdition === edition.id && (
-                <span className="active-indicator" style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: '40%',
-                  height: '3px',
-                  background: edition.color,
-                  borderRadius: '3px 3px 0 0'
-                }}></span>
-              )}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Background design elements */}
@@ -623,460 +540,227 @@ return (
             maxWidth: '1100px',
             margin: '2rem auto'
           }}>
-            {/* Header with details */}
-            <div className="edition-header" style={{
-              display: 'flex',
-              flexDirection: isMobile ? 'column' : 'row',
-              justifyContent: 'space-between',
-              alignItems: isMobile ? 'flex-start' : 'center',
-              marginBottom: '2rem',
-              padding: isMobile ? '1.5rem 1.2rem' : '1.8rem',
-              borderRadius: '16px',
-              background: 'linear-gradient(145deg, rgba(20, 20, 20, 0.6), rgba(10, 10, 10, 0.8))',
-              border: '1px solid rgba(255, 215, 0, 0.1)',
-              position: 'relative',
-              overflow: 'hidden',
-              boxShadow: '0 15px 40px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 0, 0, 0.1)'
-            }}>
-              {/* Background with edition color */}
-              <div className="header-bg" style={{
-                position: 'absolute',
-                inset: 0,
-                background: `radial-gradient(circle at top right, ${currentEdition.color}25, transparent 70%)`,
-                opacity: 0.9
-              }}></div>
 
-              <div className="header-content" style={{
-                position: 'relative',
-                zIndex: 1,
-                flex: 1,
-                width: '100%'
-              }}>
-                {/* Edition date badge */}
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: '1.2rem',
-                  width: '100%'
-                }}>
+            {/* Visual edition selector with glowing edges */}
+            <div className="edition-tabs" style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: isMobile ? '1rem' : '1.5rem',
+              margin: '0 auto 2rem',
+              maxWidth: '900px'
+            }}>
+              {editions.map(edition => (
+                <button
+                  key={edition.id}
+                  onClick={() => handleEditionClick(edition.id)}
+                  style={{
+                    backgroundColor: activeEdition === edition.id
+                      ? 'rgba(20, 20, 20, 0.9)'
+                      : 'rgba(15, 15, 15, 0.7)',
+                    color: activeEdition === edition.id
+                      ? edition.color
+                      : 'rgba(255, 255, 255, 0.7)',
+                    border: `1px solid ${activeEdition === edition.id ? edition.color : 'rgba(255, 255, 255, 0.1)'}`,
+                    borderRadius: '10px',
+                    padding: isMobile ? '0.9rem 0.8rem' : '1.2rem 1.5rem',
+                    fontSize: isMobile ? '0.8rem' : '0.9rem',
+                    fontWeight: activeEdition === edition.id ? 600 : 500,
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    flexGrow: 1,
+                    flexBasis: isMobile ? '38%' : '18%',
+                    maxWidth: isMobile ? '42%' : '19%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    boxShadow: activeEdition === edition.id
+                      ? `0 10px 25px rgba(0, 0, 0, 0.25), 0 0 15px rgba(${edition.color.match(/\d+/g).join(',')}, 0.3)`
+                      : '0 5px 15px rgba(0, 0, 0, 0.15)',
+                    backdropFilter: 'blur(5px)',
+                    WebkitBackdropFilter: 'blur(5px)',
+                    transform: 'translateY(0)',
+                    fontFamily: 'Poppins, sans-serif'
+                  }}
+                >
+                  {activeEdition === edition.id && (
+                    <span style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: `radial-gradient(circle at center, ${edition.color}25 0%, transparent 70%)`,
+                      opacity: 0.8
+                    }}></span>
+                  )}
+
                   <span style={{
-                    display: 'inline-block',
-                    padding: '0.3rem 0.6rem',
-                    borderRadius: '16px',
-                    backgroundColor: `${currentEdition.color}22`,
-                    color: currentEdition.color,
-                    fontSize: isMobile ? '0.7rem' : '0.8rem',
-                    fontWeight: 600,
-                    boxShadow: `0 3px 8px rgba(0, 0, 0, 0.15), 0 0 5px ${currentEdition.color}22`,
-                    border: `1px solid ${currentEdition.color}33`
+                    position: 'relative',
+                    zIndex: 1,
+                    fontSize: isMobile ? '1rem' : '1.2rem',
+                    fontWeight: 700
                   }}>
-                    {currentEdition.date}
+                    Eduthon {edition.id}.0
                   </span>
 
                   <span style={{
-                    display: 'inline-block',
-                    padding: '0.3rem 0.6rem',
-                    borderRadius: '16px',
-                    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                    color: '#fff',
-                    fontSize: isMobile ? '0.7rem' : '0.8rem',
-                    fontWeight: 600,
-                    opacity: 0.7
+                    position: 'relative',
+                    zIndex: 1,
+                    opacity: 0.9,
+                    fontSize: isMobile ? '0.7rem' : '0.8rem'
+                  }}>
+                    {edition.date}
+                  </span>
+
+                  {activeEdition === edition.id && (
+                    <span className="active-indicator" style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: '40%',
+                      height: '3px',
+                      background: edition.color,
+                      borderRadius: '3px 3px 0 0'
+                    }}></span>
+                  )}
+                </button>
+              ))}
+            </div>
+            
+            {/* Gallery container with sidebar */}
+            <div className="gallery-container" style={{
+              display: 'flex',
+              flexDirection: isMobile ? 'column' : 'row',
+              gap: isMobile ? '1.5rem' : '2rem',
+              position: 'relative'
+            }}>
+              {/* Left sidebar with edition info */}
+              <div className="edition-info-sidebar" style={{
+                width: isMobile ? '100%' : '220px',
+                flexShrink: 0,
+                borderRadius: '12px',
+                padding: isMobile ? '1rem' : '1.5rem',
+                background: 'rgba(20, 20, 20, 0.5)',
+                border: `1px solid ${currentEdition.color}30`,
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.5rem',
+                alignSelf: 'flex-start',
+                position: isMobile ? 'relative' : 'sticky',
+                top: isMobile ? 'auto' : '1.5rem'
+              }}>
+                {/* Edition number badge */}
+                <div style={{
+                  textAlign: 'center',
+                  padding: '0.5rem',
+                  borderRadius: '8px',
+                  background: `${currentEdition.color}15`,
+                  border: `1px solid ${currentEdition.color}30`,
+                  marginBottom: '0.5rem'
+                }}>
+                  <span style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 800,
+                    backgroundImage: `linear-gradient(45deg, #fff, ${currentEdition.color})`,
+                    backgroundSize: '100%',
+                    backgroundRepeat: 'no-repeat',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    display: 'block',
+                    textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)'
                   }}>
                     EDUTHON {currentEdition.id}.0
                   </span>
                 </div>
 
-                {/* Title with enhanced styling */}
-                <h1 style={{
-                  margin: '0 0 1.5rem',
-                  fontSize: isMobile ? '1.8rem' : '2.5rem',
-                  fontWeight: 700,
-                  color: '#fff',
-                  letterSpacing: '-0.01em',
-                  fontFamily: 'Poppins, sans-serif',
-                  position: 'relative',
-                  display: 'block',
-                  maxWidth: '100%',
-                  textAlign: 'center',
-                  width: '100%'
+                {/* Date */}
+                <div style={{
+                  borderLeft: `3px solid ${currentEdition.color}`,
+                  paddingLeft: '1rem'
                 }}>
-                  {currentEdition.id === 4 ? (
-                    // Special styling for "Chalkboard to Chatbot"
-                    <div style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      position: 'relative',
-                      padding: '0.5rem 1rem 1.5rem',
-                      marginBottom: '0.5rem',
-                      width: '100%',
-                      textAlign: 'center'
-                    }}>
-                      {/* First part of the title */}
-                      <span style={{
-                        backgroundImage: 'linear-gradient(45deg, #fff, #B0B0B0)',
-                        backgroundSize: '100%',
-                        backgroundRepeat: 'no-repeat',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        position: 'relative',
-                        display: 'inline-block',
-                        fontSize: isMobile ? '1.8rem' : '2.5rem',
-                        fontFamily: 'Poppins, sans-serif',
-                        marginBottom: '0.2rem',
-                        fontWeight: 700,
-                        textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)'
-                      }}>
-                        Chalkboard
-                      </span>
+                  <h3 style={{
+                    fontSize: '0.9rem',
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    fontWeight: 500,
+                    marginBottom: '0.3rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px'
+                  }}>
+                    Date
+                  </h3>
+                  <p style={{
+                    fontSize: '1.1rem',
+                    fontWeight: 600,
+                    color: '#fff',
+                    margin: 0
+                  }}>
+                    {currentEdition.date}
+                  </p>
+                </div>
 
-                      {/* Connecting text */}
-                      <span style={{
-                        color: currentEdition.color,
-                        margin: '-0.5rem 0',
-                        fontSize: isMobile ? '1.5rem' : '2rem',
-                        fontWeight: 700,
-                        letterSpacing: '1px',
-                        transform: 'scale(1.5)',
-                        textShadow: `0 0 10px ${currentEdition.color}80`
-                      }}>
-                        to
-                      </span>
-
-                      {/* Second part of the title */}
-                      <span style={{
-                        backgroundImage: `linear-gradient(45deg, #fff, ${currentEdition.color})`,
-                        backgroundSize: '100%',
-                        backgroundRepeat: 'no-repeat',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        position: 'relative',
-                        display: 'inline-block',
-                        fontSize: isMobile ? '2rem' : '2.7rem',
-                        fontFamily: 'Poppins, sans-serif',
-                        fontWeight: 800,
-                        letterSpacing: '-0.01em',
-                        textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)'
-                      }}>
-                        Chatbot
-                      </span>
-
-                      {/* Decorative elements */}
-                      <span style={{
-                        position: 'absolute',
-                        top: '10%',
-                        left: '5%',
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        background: '#B0B0B0',
-                        boxShadow: '0 0 10px #B0B0B0'
-                      }}></span>
-
-                      <span style={{
-                        position: 'absolute',
-                        bottom: '15%',
-                        right: '5%',
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        background: currentEdition.color,
-                        boxShadow: `0 0 10px ${currentEdition.color}`
-                      }}></span>
-                    </div>
-                  ) : currentEdition.id === 3 ? (
-                    // Special styling for "Reimagining Classrooms"
-                    <div style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      position: 'relative',
-                      padding: '0.5rem 1rem 1.5rem',
-                      marginBottom: '0.5rem',
-                      width: '100%',
-                      textAlign: 'center'
-                    }}>
-                      <span style={{
-                        backgroundImage: `linear-gradient(45deg, #fff, ${currentEdition.color})`,
-                        backgroundSize: '100%',
-                        backgroundRepeat: 'no-repeat',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        position: 'relative',
-                        display: 'inline-block',
-                        fontSize: isMobile ? '1.7rem' : '2.2rem',
-                        fontFamily: 'Poppins, sans-serif',
-                        textTransform: 'uppercase',
-                        letterSpacing: '3px',
-                        fontWeight: 700,
-                        textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)',
-                        transform: 'skew(-5deg)',
-                        marginBottom: '0.8rem'
-                      }}>
-                        Reimagining
-                      </span>
-
-                      <span style={{
-                        backgroundImage: 'linear-gradient(45deg, #fff, rgba(255,255,255,0.7))',
-                        backgroundSize: '100%',
-                        backgroundRepeat: 'no-repeat',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        position: 'relative',
-                        display: 'inline-block',
-                        fontSize: isMobile ? '2.2rem' : '3rem',
-                        fontFamily: 'Poppins, sans-serif',
-                        fontWeight: 800,
-                        fontStyle: 'italic',
-                        letterSpacing: '-0.01em',
-                        textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)',
-                        padding: '0 1.5rem'
-                      }}>
-                        Classrooms
-                      </span>
-
-                      {/* Decorative elements */}
-                      <span style={{
-                        position: 'absolute',
-                        top: '15%',
-                        left: '10%',
-                        width: '10px',
-                        height: '10px',
-                        background: currentEdition.color,
-                        transform: 'rotate(45deg)',
-                        boxShadow: `0 0 10px ${currentEdition.color}`
-                      }}></span>
-
-                      <span style={{
-                        position: 'absolute',
-                        bottom: '25%',
-                        right: '10%',
-                        width: '10px',
-                        height: '10px',
-                        background: currentEdition.color,
-                        transform: 'rotate(45deg)',
-                        boxShadow: `0 0 10px ${currentEdition.color}`
-                      }}></span>
-                    </div>
-                  ) : currentEdition.id === 2 ? (
-                    // Special styling for "Winds of Change"
-                    <div style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      position: 'relative',
-                      padding: '0.5rem 1rem 1.5rem',
-                      marginBottom: '0.5rem',
-                      width: '100%',
-                      textAlign: 'center'
-                    }}>
-                      <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '10px',
-                        marginBottom: '0.5rem'
-                      }}>
-                        <span style={{
-                          width: '35px',
-                          height: '2px',
-                          background: currentEdition.color,
-                          display: 'inline-block',
-                          transform: 'translateY(-5px)'
-                        }}></span>
-
-                        <span style={{
-                          backgroundImage: `linear-gradient(45deg, #fff, ${currentEdition.color})`,
-                          backgroundSize: '100%',
-                          backgroundRepeat: 'no-repeat',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                          position: 'relative',
-                          display: 'inline-block',
-                          fontSize: isMobile ? '2rem' : '2.7rem',
-                          fontFamily: 'Poppins, sans-serif',
-                          fontWeight: 700,
-                          textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)'
-                        }}>
-                          Winds
-                        </span>
-
-                        <span style={{
-                          width: '35px',
-                          height: '2px',
-                          background: currentEdition.color,
-                          display: 'inline-block',
-                          transform: 'translateY(-5px)'
-                        }}></span>
-                      </div>
-
-                      <span style={{
-                        position: 'relative',
-                        color: '#fff',
-                        fontSize: isMobile ? '1.3rem' : '1.6rem',
-                        fontWeight: 300,
-                        textTransform: 'uppercase',
-                        letterSpacing: '4px',
-                        marginBottom: '0.5rem'
-                      }}>
-                        of
-                      </span>
-
-                      <span style={{
-                        backgroundImage: 'linear-gradient(45deg, #fff, rgba(255,255,255,0.8))',
-                        backgroundSize: '100%',
-                        backgroundRepeat: 'no-repeat',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        position: 'relative',
-                        display: 'inline-block',
-                        fontSize: isMobile ? '2.2rem' : '3rem',
-                        fontFamily: 'Poppins, sans-serif',
-                        fontWeight: 800,
-                        letterSpacing: '1px',
-                        textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)'
-                      }}>
-                        Change
-                      </span>
-                    </div>
-                  ) : currentEdition.id === 1 ? (
-                    // Special styling for "Bold Beginnings"
-                    <div style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      position: 'relative',
-                      padding: '0.5rem 1rem 1.5rem',
-                      marginBottom: '0.5rem',
-                      width: '100%',
-                      textAlign: 'center'
-                    }}>
-                      <span style={{
-                        backgroundImage: `linear-gradient(45deg, ${currentEdition.color}, #fff)`,
-                        backgroundSize: '100%',
-                        backgroundRepeat: 'no-repeat',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        position: 'relative',
-                        display: 'inline-block',
-                        fontSize: isMobile ? '3rem' : '4rem',
-                        fontFamily: 'Poppins, sans-serif',
-                        fontWeight: 900,
-                        letterSpacing: '-1px',
-                        textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)',
-                        textTransform: 'uppercase',
-                        marginBottom: '-5px',
-                        lineHeight: 1
-                      }}>
-                        Inaugural
-                      </span>
-
-                      <span style={{
-                        backgroundImage: 'linear-gradient(45deg, rgba(255,255,255,0.7), #fff)',
-                        backgroundSize: '100%',
-                        backgroundRepeat: 'no-repeat',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        position: 'relative',
-                        display: 'inline-block',
-                        fontSize: isMobile ? '1.6rem' : '2rem',
-                        fontFamily: 'Poppins, sans-serif',
-                        fontWeight: 300,
-                        letterSpacing: '3px',
-                        textTransform: 'uppercase',
-                        textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)'
-                      }}>
-                        Edition
-                      </span>
-
-                      {/* Decorative star elements */}
-                      <span style={{
-                        position: 'absolute',
-                        top: '15%',
-                        left: '5%',
-                        color: currentEdition.color,
-                        fontSize: '20px',
-                        transform: 'rotate(-15deg)'
-                      }}>
-                        ★
-                      </span>
-
-                      <span style={{
-                        position: 'absolute',
-                        bottom: '20%',
-                        right: '5%',
-                        color: currentEdition.color,
-                        fontSize: '16px',
-                        transform: 'rotate(15deg)'
-                      }}>
-                        ★
-                      </span>
-
-                      <span style={{
-                        position: 'absolute',
-                        top: '40%',
-                        right: '10%',
-                        color: currentEdition.color,
-                        fontSize: '10px'
-                      }}>
-                        ★
-                      </span>
-                    </div>
-                  ) : (
-                    // Regular styling for any other editions
-                    <span style={{
-                      backgroundImage: `linear-gradient(45deg, #fff, ${currentEdition.color})`,
-                      backgroundSize: '100%',
-                      backgroundRepeat: 'no-repeat',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      position: 'relative',
-                      padding: '0 0.5rem',
-                      display: 'inline-block',
-                      textShadow: '0 2px 15px rgba(255, 255, 255, 0.15)'
-                    }}>
-                      {currentEdition.title}
-                    </span>
-                  )}
-                </h1>
-
-                {/* Description with enhanced styling */}
-                <p style={{
-                  textAlign: 'center',
-                  margin: 'auto',
-                  fontSize: isMobile ? '1rem' : '1.1rem',
-                  lineHeight: 1.6,
-                  color: 'rgba(255, 255, 255, 0.85)',
-                  maxWidth: '800px',
-                  padding: '0.5rem 0',
-                  borderLeft: isMobile ? 'none' : `3px solid ${currentEdition.color}40`,
-                  paddingLeft: isMobile ? '0' : '1.5rem',
-                  position: 'relative',
-                  backgroundColor: 'transparent',
-                  borderRadius: isMobile ? '0' : '0 8px 8px 0'
+                {/* Theme */}
+                <div style={{
+                  borderLeft: `3px solid ${currentEdition.color}`,
+                  paddingLeft: '1rem'
                 }}>
-                  {currentEdition.description}
-                </p>
+                  <h3 style={{
+                    fontSize: '0.9rem',
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    fontWeight: 500,
+                    marginBottom: '0.3rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px'
+                  }}>
+                    Theme
+                  </h3>
+                  <p style={{
+                    fontSize: '1.1rem',
+                    fontWeight: 600,
+                    color: '#fff',
+                    margin: 0
+                  }}>
+                    {currentEdition.title}
+                  </p>
+                </div>
+
+                {/* Short description */}
+                <div style={{
+                  borderLeft: `3px solid ${currentEdition.color}`,
+                  paddingLeft: '1rem'
+                }}>
+                  <h3 style={{
+                    fontSize: '0.9rem',
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    fontWeight: 500,
+                    marginBottom: '0.3rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px'
+                  }}>
+                    About
+                  </h3>
+                  <p style={{
+                    fontSize: '0.9rem',
+                    lineHeight: 1.5,
+                    color: 'rgba(255, 255, 255, 0.85)',
+                    margin: 0
+                  }}>
+                    {currentEdition.description}
+                  </p>
+                </div>
               </div>
-            </div>
-
-            {/* Enhanced Gallery section with larger images */}
-            <div ref={scrollRef} className="gallery-section">
+              
+              {/* Main gallery content */}
               <div style={{
+                flex: 1,
                 display: 'flex',
                 flexDirection: 'column',
-                maxWidth: '1200px',
-                margin: '0 auto'
+                maxWidth: isMobile ? '100%' : 'calc(100% - 250px)'
               }}>
                 <div style={{
                   width: '100%'
@@ -1499,28 +1183,6 @@ return (
                                     }}></div>
                                   </>
                                 )}
-
-                                {/* Media type badge */}
-                                <div style={{
-                                  position: 'absolute',
-                                  top: '12px',
-                                  left: '12px',
-                                  backgroundColor: isVideo ? 'rgba(255, 0, 0, 0.6)' : 'rgba(0, 120, 215, 0.6)',
-                                  color: 'white',
-                                  padding: '0.3rem 0.6rem',
-                                  borderRadius: '4px',
-                                  fontSize: '0.75rem',
-                                  fontWeight: '700',
-                                  textTransform: 'uppercase',
-                                  letterSpacing: '0.5px',
-                                  zIndex: 5,
-                                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
-                                }}>
-                                  {isVideo ? 'Video' : 'Image'}
-                                </div>
-
-
-
 
                                 {/* Expand/collapse button for videos */}
                                 {isVideo && (

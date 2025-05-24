@@ -153,8 +153,8 @@ const Hero = ({ onRegisterClick }) => {
       ref={heroRef}
       className="hero-section"
       style={{
-        marginTop: isMobile ? 'min(calc(-12vh), -100px)' : '-15px',
-        minHeight: isMobile ? 'calc(100vh - min(80px, 10vh))' : 'calc(100vh - 80px)',
+        marginTop: isMobile ? 'clamp(-100px, -12vh, -60px)' : 'clamp(-20px, -2vh, -15px)',
+        minHeight: isMobile ? 'calc(100vh - clamp(60px, 10vh, 80px))' : 'calc(100vh - clamp(70px, 8vh, 80px))',
         height: 'auto',
         display: 'flex',
         flexDirection: 'column',
@@ -188,7 +188,6 @@ const Hero = ({ onRegisterClick }) => {
         overflow: 'hidden',
         marginTop: isMobile ? 'clamp(0.5rem, 2vh, 1rem)' : '0',
         marginBottom: isMobile ? 'clamp(-1.3rem, -1vh, -2rem)' : 'auto',
-        // padding: isMobile ? 'clamp(1rem, 3vh, 1.5rem) clamp(0.5rem, 2vw, 0.8rem) clamp(2rem, 4vh, 2.5rem)' : '0',
         paddingTop: isMobile ? 'clamp(0.5rem, 2vh, 1rem)' : '0',
         paddingBottom: isMobile ? 'clamp(1rem, 3vh, 1.5rem)' : '0',
         paddingLeft: isMobile ? 'clamp(0.5rem, 2vw, 0.8rem)' : '0',
@@ -198,45 +197,50 @@ const Hero = ({ onRegisterClick }) => {
         backdropFilter: isMobile ? 'blur(5px)' : 'none',
         WebkitBackdropFilter: isMobile ? 'blur(5px)' : 'none',
         height: '100%',
-        minHeight: '100vh',
+        minHeight: isMobile ? 'calc(100vh - clamp(80px, 12vh, 100px))' : '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundImage: isMobile ? 'none' : 'linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.85))',
       }}>
+
         {/* Background Carousel - Only shown on desktop */}
         {!isMobile && <ImageCarousel images={carouselImages} isBackground={true} fullHeight={true} />}
 
         {/* Content overlay */}
         <div className="container fade-in hero-content" style={{
-          maxWidth: '1200px',
-          transform: isMobile ? 'scale(0.9)' : 'scale(0.85)',
+          maxWidth: isMobile ? 'clamp(300px, 95%, 1000px)' : 'clamp(800px, 90%, 1200px)',
+          transform: isMobile ? 'scale(clamp(0.85, 0.9, 0.95))' : 'scale(clamp(0.8, 0.85, 0.9))',
           transformOrigin: 'center center',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           minHeight: isMobile ? 'auto' : 'auto',
-          // padding: isMobile ? 'clamp(0.5rem, 2vh, 1rem) 0 0' : 'clamp(1rem, 3vh, 1.5rem) 0 0',
-          paddingTop: isMobile ? 'clamp(0.5rem, 2vh, 1rem)' : 'clamp(1rem, 0vh, 1.5rem)',
-          paddingBottom: isMobile ? 'clamp(0rem, 3vh, 1rem)' : 'clamp(1rem, 0vh, 2.5rem)',
-          paddingLeft: isMobile ? 'clamp(0.5rem, 2vw, 0.8rem)' : '0',
-          paddingRight: isMobile ? 'clamp(0.5rem, 2vw, 0.8rem)' : '0',
+          paddingTop: isMobile ? 'clamp(0.5rem, 2vh, 1rem)' : 'clamp(1rem, 3vh, 1.5rem)',
+          paddingBottom: isMobile ? 'clamp(0.5rem, 2vh, 1rem)' : 'clamp(1rem, 3vh, 1.5rem)',
+          paddingLeft: isMobile ? 'clamp(0.5rem, 3vw, 1rem)' : 'clamp(1rem, 3vw, 1.5rem)',
+          paddingRight: isMobile ? 'clamp(0.5rem, 3vw, 1rem)' : 'clamp(1rem, 3vw, 1.5rem)',
           marginLeft: 'auto',
           marginRight: 'auto',
-          marginTop: isMobile ? 'clamp(-2.5rem, -4vh, -2.5rem)' : 'clamp(-2.5rem, -5vh, -2.5rem)',
-          marginBottom: isMobile ? 'clamp(-3rem, -4vh, -2.5rem)' : 'clamp(-1rem, -6vh, -2.5rem)',
+          marginTop: isMobile ? 'clamp(-2.5rem, -4vh, -1.5rem)' : 'clamp(-2.5rem, -5vh, -1.5rem)',
+          marginBottom: isMobile ? 'clamp(-3rem, -4vh, -1.5rem)' : 'clamp(-2rem, -5vh, -1rem)',
           position: 'relative',
           zIndex: 2,
           overflow: 'visible',
+          transition: 'all 0.3s ease-in-out'
         }}>
+
           <div
             className="hero-badge mx-auto w-auto"
             style={{
-              // Ensure the text remains visible against the gradient
-              padding: isMobile ? 'clamp(0.3rem, 1vh, 0.35rem) clamp(0.35rem, 1vw, 0.4rem)' : 'clamp(0.35rem, 1vh, 0.4rem) clamp(0.6rem, 1.5vw, 0.7rem)',
-              margin: isMobile ? 'clamp(1rem, 3vh, 1.5rem) auto' : 'clamp(0.4rem, 1vh, 0.5rem) auto clamp(1.2rem, 3vh, 1.5rem)',
+              padding: isMobile 
+                ? 'clamp(0.3rem, 1.5vh, 0.4rem) clamp(0.35rem, 2vw, 0.5rem)' 
+                : 'clamp(0.35rem, 1.2vh, 0.45rem) clamp(0.6rem, 2vw, 0.8rem)',
+              margin: isMobile 
+                ? 'clamp(0.8rem, 3vh, 1.5rem) auto clamp(0.4rem, 1.5vh, 0.8rem)' 
+                : 'clamp(0.4rem, 1.5vh, 0.6rem) auto clamp(1rem, 3vh, 1.5rem)',
               position: 'relative',
               zIndex: 5,
               display: 'inline-block',
@@ -246,6 +250,7 @@ const Hero = ({ onRegisterClick }) => {
               borderRadius: 'clamp(20px, 3vw, 25px)',
               border: '1px solid rgba(255, 215, 0, 0.4)',
               transform: 'scale(1)',
+              transition: 'all 0.3s ease-in-out'
             }}
           >
             <span
@@ -263,17 +268,25 @@ const Hero = ({ onRegisterClick }) => {
 
           <h1 style={{
             fontSize: isMobile ? 'clamp(2rem, 7vw, 3.5rem)' : 'clamp(2.4rem, 4.5vw, 4.2rem)',
-            maxWidth: 'min(1100px, 90vw)',
+            maxWidth: isMobile ? 'clamp(300px, 95vw, 900px)' : 'clamp(600px, 90vw, 1100px)',
             margin: '0 auto',
-            lineHeight: 'clamp(1, 1.1, 1.2)',
+            padding: isMobile ? 'clamp(0.3rem, 1vh, 0.5rem) clamp(0.3rem, 1.5vw, 0.5rem)' : 'clamp(0.5rem, 1.5vh, 0.8rem) clamp(0.5rem, 2vw, 0.8rem)',
+            lineHeight: isMobile ? 'clamp(1, 1.1, 1.15)' : 'clamp(1.05, 1.15, 1.2)',
             letterSpacing: 'clamp(-0.04em, -0.03em, -0.02em)',
             fontWeight: 800,
-            marginBottom: isMobile ? 'clamp(0.6rem, 2vh, 0.8rem)' : 'clamp(1rem, 2.5vh, 1.2rem)'
+            marginBottom: isMobile ? 'clamp(0.6rem, 2vh, 0.8rem)' : 'clamp(0.8rem, 2.5vh, 1.2rem)',
+            transition: 'all 0.3s ease-in-out'
           }}>
+
             <span style={{
               display: 'block',
+              marginTop: isMobile ? 'clamp(0.5rem, 1.5vh, 0.8rem)' : 'clamp(0.8rem, 2vh, 1rem)',
               marginBottom: isMobile ? 'clamp(1.2rem, 3vh, 1.5rem)' : 'clamp(1.4rem, 3vh, 1.6rem)',
-              textAlign: 'center'
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              padding: isMobile ? 'clamp(0.3rem, 1vh, 0.5rem)' : 'clamp(0.5rem, 1.5vh, 0.8rem)',
+              textAlign: 'center',
+              transition: 'all 0.3s ease-in-out'
             }}>
               <img
                 src={logo}
@@ -281,8 +294,10 @@ const Hero = ({ onRegisterClick }) => {
                 className="mx-auto"
                 style={{
                   height: isMobile ? 'clamp(80px, 18vw, 110px)' : 'clamp(90px, 15vw, 120px)',
+                  width: 'auto',
                   display: 'inline-block',
-                  filter: 'drop-shadow(0 0 clamp(8px, 2vw, 12px) rgba(255, 215, 0, 0.5))'
+                  filter: 'drop-shadow(0 0 clamp(8px, 2vw, 12px) rgba(255, 215, 0, 0.5))',
+                  transition: 'all 0.3s ease-in-out'
                 }}
               />
             </span>
@@ -291,8 +306,13 @@ const Hero = ({ onRegisterClick }) => {
               fontSize: isMobile ? 'clamp(1.6rem, 5vw, 2.6rem)' : 'clamp(1.7rem, 2.5vw, 2.3rem)',
               fontWeight: 600,
               opacity: 0.95,
-              marginBottom: isMobile ? '0' : 'clamp(-2.5rem, -4vh, -2rem)',
+              margin: isMobile 
+                ? 'clamp(0.3rem, 1vh, 0.5rem) auto clamp(0.5rem, 1.5vh, 0.8rem)' 
+                : 'clamp(0.5rem, 1.5vh, 0.8rem) auto clamp(-2.5rem, -4vh, -2rem)',
+              padding: isMobile ? 'clamp(0.2rem, 0.8vh, 0.3rem) 0' : 'clamp(0.3rem, 1vh, 0.5rem) 0',
               letterSpacing: 'clamp(-0.02em, -0.01em, 0)',
+              lineHeight: isMobile ? '1.2' : '1.3',
+              transition: 'all 0.3s ease-in-out'
             }}>
               The Next of Education: <span className="gradient-text">AI Meets Humanity</span>
             </span>
@@ -309,160 +329,150 @@ const Hero = ({ onRegisterClick }) => {
 
           <div className="glass-container hero-event-details" style={{
             margin: isMobile 
-              ? 'clamp(0.3rem, 1vh, 0.4rem) auto clamp(0.15rem, 0.5vh, 0.2rem)'
-              : 'clamp(0.6rem, 1.5vh, 0.8rem) auto clamp(0.3rem, 1vh, 0.4rem)',
+              ? 'clamp(0.5rem, 2vh, 1rem) auto clamp(0.5rem, 2vh, 1rem)'
+              : 'clamp(0.8rem, 2.5vh, 1.2rem) auto clamp(0.5rem, 2vh, 1rem)',
             padding: isMobile 
-              ? 'clamp(0.5rem, 1.5vh, 0.6rem) clamp(0.6rem, 2vw, 0.8rem)'
-              : 'clamp(0.7rem, 2vh, 0.8rem) clamp(1rem, 2.5vw, 1.2rem)',
-            maxWidth: isMobile ? '90%' : '60%',
-            gap: 'clamp(0.6rem, 2vw, 2rem)',
+              ? 'clamp(0.5rem, 1.5vh, 0.8rem) clamp(0.6rem, 2vw, 1rem)'
+              : 'clamp(0.7rem, 2vh, 1rem) clamp(1rem, 3vw, 1.5rem)',
+            maxWidth: isMobile ? 'clamp(280px, 90%, 450px)' : 'clamp(400px, 60%, 600px)',
+            gap: isMobile ? 'clamp(0.6rem, 2vw, 1rem)' : 'clamp(1rem, 3vw, 2rem)',
             display: 'inline-flex',
             justifyContent: 'center',
             flexWrap: 'wrap',
             backgroundColor: 'rgba(255, 255, 255, 0.05)',
-            transform: 'scale(0.9)',
+            transform: isMobile ? 'scale(clamp(0.85, 0.9, 0.95))' : 'scale(clamp(0.9, 0.95, 1))',
             transformOrigin: 'center center',
-            transition: 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
-            borderRadius: '8px',
+            transition: 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
+            borderRadius: isMobile ? 'clamp(6px, 1.5vw, 8px)' : 'clamp(8px, 1vw, 10px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
           }}>
             <div style={{
-              margin: '2px',
+              margin: isMobile ? 'clamp(2px, 0.5vh, 4px)' : 'clamp(3px, 0.8vh, 5px)',
+              padding: isMobile ? 'clamp(2px, 0.5vh, 4px)' : 'clamp(3px, 0.8vh, 5px)',
               display: 'flex',
               alignItems: 'center',
-              gap: '1rem',
+              gap: isMobile ? 'clamp(0.5rem, 1.5vw, 0.8rem)' : 'clamp(0.8rem, 2vw, 1rem)',
               fontWeight: '500',
-              fontSize: isMobile ? '0.95rem' : 'clamp(1.1rem, 2.2vw, 1.4rem)'
+              fontSize: isMobile ? 'clamp(0.9rem, 2.8vw, 1rem)' : 'clamp(1rem, 1.5vw, 1.4rem)',
+              transition: 'all 0.3s ease-in-out'
             }}>
-              <FaCalendarAlt color="var(--secondary-color)" size={isMobile ? 22 : 26} />
+              <FaCalendarAlt color="var(--secondary-color)" size={isMobile ? Math.max(18, Math.min(22, window.innerWidth * 0.05)) : Math.max(22, Math.min(26, window.innerWidth * 0.02))} />
               <span>August 30, 2025</span>
             </div>
             <div style={{
-              margin: '2px',
+              margin: isMobile ? 'clamp(2px, 0.5vh, 4px)' : 'clamp(3px, 0.8vh, 5px)',
+              padding: isMobile ? 'clamp(2px, 0.5vh, 4px)' : 'clamp(3px, 0.8vh, 5px)',
               display: 'flex',
               alignItems: 'center',
-              gap: '1rem',
+              gap: isMobile ? 'clamp(0.5rem, 1.5vw, 0.8rem)' : 'clamp(0.8rem, 2vw, 1rem)',
               fontWeight: '500',
-              fontSize: isMobile ? '0.95rem' : 'clamp(1.1rem, 2.2vw, 1.4rem)'
+              fontSize: isMobile ? 'clamp(0.9rem, 2.8vw, 1rem)' : 'clamp(1rem, 1.5vw, 1.4rem)',
+              transition: 'all 0.3s ease-in-out'
             }}>
-              <FaMapMarkerAlt color="var(--secondary-color)" size={isMobile ? 22 : 26} />
+              <FaMapMarkerAlt color="var(--secondary-color)" size={isMobile ? Math.max(18, Math.min(22, window.innerWidth * 0.05)) : Math.max(22, Math.min(26, window.innerWidth * 0.02))} />
               <span>Hyatt, Chandigarh</span>
             </div>
           </div>
 
-          <div
-            className="btn-container hero-buttons flex flex-wrap items-center justify-center gap-6 mx-auto w-full max-w-xs md:max-w-none"
-            style={{
-              marginTop: isMobile ? 'clamp(0.5rem, 1.5vh, 0.7rem)' : 'clamp(0.8rem, 2vh, 1rem)',
-              marginBottom: isMobile ? 'clamp(0.6rem, 1.5vh, 0.8rem)' : '0',
-              width: "100%",
-              padding: "0",
-              justifyContent: "center",
-              position: "relative",
-              zIndex: 5,
-              background: "transparent",
-            }}
-          >
-            <div className="btn-row"
-              style={{
-                display: "flex",
-                flexDirection: isMobile ? "row" : "row",
-                gap: isMobile ? "0.8rem" : "1rem",
-                flexWrap: isMobile ? "nowrap" : "nowrap",
-              }}
-            >
-              <RouterLink
+          <div className="btn-container hero-buttons">
+            {/* Simple flex-based responsive buttons */}
+            <div style={{
+              display: 'flex',
+              flexWrap: isMobile ? 'wrap' : 'nowrap',
+              gap: isMobile ? '0.8rem' : '1rem',
+              justifyContent: 'center',
+              width: '100%',
+              maxWidth: isMobile ? '400px' : '800px',
+              margin: '1rem auto',
+            }}>
+              {/* Register Button */}
+              <RouterLink 
                 to="/register"
-                className="w-auto"
                 style={{
-                  textDecoration: "none"
+                  textDecoration: 'none',
+                  flex: isMobile ? '1 1 45%' : '1',
+                  minWidth: isMobile ? '120px' : '180px',
                 }}
               >
                 <button
-                  className="btn btn-outline w-auto text-sm tracking-wider min-h-[36px] px-3 hover-glow"
+                  className="btn btn-outline text-sm tracking-wider hover-glow"
                   style={{
-                    minWidth: isMobile ? "130px" : "220px",
-                    borderRadius: "6px",
+                    width: '100%',
+                    borderRadius: isMobile ? '6px' : '8px',
                     backdropFilter: "blur(10px)",
                     WebkitBackdropFilter: "blur(10px)",
-                    borderWidth: "1.5px",
+                    borderWidth: isMobile ? '1px' : '1.5px',
                     borderColor: "rgba(255, 215, 0, 0.4)",
-                    transition: "all 0.3s ease",
-                    fontSize: isMobile ? "0.85rem" : "1rem",
-                    padding: isMobile ? "0.4rem 0.8rem" : "0.6rem 1.5rem",
-                    minHeight: isMobile ? "40px" : "48px",
-                    letterSpacing: "0.5px",
+                    transition: "all 0.3s ease-in-out",
+                    fontSize: isMobile ? '0.85rem' : '1rem',
+                    padding: isMobile ? '0.4rem 0.8rem' : '0.6rem 1.5rem',
+                    minHeight: isMobile ? '40px' : '48px',
                     color: "#fff",
                     backgroundColor: "rgba(255, 255, 255, 0.05)",
+                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
                   }}
                 >
                   Register Now
                 </button>
               </RouterLink>
 
+              {/* Sponsor Button */}
               <div
-                className="w-auto"
                 style={{
-                  flex: isMobile ? "1" : "none",
-                  maxWidth: isMobile ? "150px" : "230px",
-                  cursor: "pointer"
+                  flex: isMobile ? '1 1 45%' : '1',
+                  minWidth: isMobile ? '120px' : '180px',
+                  cursor: 'pointer',
                 }}
               >
                 <button
                   onClick={scrollToSponsors}
-                  className="btn btn-outline w-auto text-sm tracking-wider min-h-[36px] px-3 hover-glow"
+                  className="btn btn-outline text-sm tracking-wider hover-glow"
                   style={{
-                    minWidth: isMobile ? "130px" : "220px",
-                    borderRadius: "6px",
+                    width: '100%',
+                    borderRadius: isMobile ? '6px' : '8px',
                     backdropFilter: "blur(10px)",
                     WebkitBackdropFilter: "blur(10px)",
-                    borderWidth: "1.5px",
+                    borderWidth: isMobile ? '1px' : '1.5px',
                     borderColor: "rgba(255, 215, 0, 0.4)",
-                    transition: "all 0.3s ease",
-                    fontSize: isMobile ? "0.85rem" : "1rem",
-                    padding: isMobile ? "0.4rem 0.8rem" : "0.6rem 1.5rem",
-                    minHeight: isMobile ? "40px" : "48px",
-                    letterSpacing: "0.5px",
+                    transition: "all 0.3s ease-in-out",
+                    fontSize: isMobile ? '0.85rem' : '1rem',
+                    padding: isMobile ? '0.4rem 0.8rem' : '0.6rem 1.5rem',
+                    minHeight: isMobile ? '40px' : '48px',
                     color: "#fff",
                     backgroundColor: "rgba(255, 255, 255, 0.05)",
+                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
                   }}
                 >
                   Become Sponsor
                 </button>
               </div>
-            </div>
 
-            <div className="button-row"
-              style={{
-                display: isMobile ? "flex" : '',
-                justifyContent: "center",
-                marginTop: isMobile ? "0.3rem" : "0",
-              }}
-            >
+              {/* Highlights Button */}
               <RouterLink
                 to="/highlights"
-                className="w-auto"
                 style={{
-                  flex: isMobile ? "1" : "none",
-                  maxWidth: isMobile ? "150px" : "230px",
-                  textDecoration: "none",
+                  textDecoration: 'none',
+                  flex: isMobile ? '1 1 100%' : '1',
+                  minWidth: isMobile ? '120px' : '180px',
                 }}
               >
                 <button
-                  className="btn btn-outline w-auto text-sm tracking-wider min-h-[36px] px-3 hover-glow"
+                  className="btn btn-outline text-sm tracking-wider hover-glow"
                   style={{
-                    minWidth: isMobile ? "130px" : "220px",
-                    borderRadius: "6px",
+                    width: '100%',
+                    borderRadius: isMobile ? '6px' : '8px',
                     backdropFilter: "blur(10px)",
                     WebkitBackdropFilter: "blur(10px)",
-                    borderWidth: "1.5px",
+                    borderWidth: isMobile ? '1px' : '1.5px',
                     borderColor: "rgba(255, 215, 0, 0.4)",
-                    transition: "all 0.3s ease",
-                    fontSize: isMobile ? "0.85rem" : "1rem",
-                    padding: isMobile ? "0.4rem 0.8rem" : "0.6rem 1.5rem",
-                    minHeight: isMobile ? "40px" : "48px",
-                    letterSpacing: "0.5px",
+                    transition: "all 0.3s ease-in-out",
+                    fontSize: isMobile ? '0.85rem' : '1rem',
+                    padding: isMobile ? '0.4rem 0.8rem' : '0.6rem 1.5rem',
+                    minHeight: isMobile ? '40px' : '48px',
                     color: "#fff",
                     backgroundColor: "rgba(255, 255, 255, 0.05)",
+                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
                   }}
                 >
                   See Highlights
@@ -474,46 +484,6 @@ const Hero = ({ onRegisterClick }) => {
           <p className={`italic max-w-[800px] mx-auto mt-[0] mb-[1rem] md:mt-[1rem] opacity-85 text-[clamp(0.9rem,1.8vw,1.2rem)] px-4 leading-relaxed`}>
             A decade-defining dialogue on technology, learning, and the soul of education.
           </p>
-        </div>
-
-         {/* Wide Carousel Card */}
-        <div className="wide-carousel-card" style={{
-          position: 'relative',
-          width: isMobile ? '100%' :'52vw',
-          maxWidth: '1200px',
-          borderRadius: '16px',
-          // margin: isMobile ? 'clamp(2rem, 4vh, 1.5rem) auto clamp(-1rem, -2vh, -1.5rem)' : 'clamp(0.8rem, 2vh, 1rem) auto',
-          marginTop: isMobile ? 'clamp(1rem, 4vh, 1.5rem)' : 'clamp(-3rem, 2vh, -4rem)',
-          marginBottom: isMobile ? 'clamp(-3rem, -2vh, -2rem)' : 'clamp(0rem, -2vh, -2rem)',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          transform: 'scale(0.95)',
-          transformOrigin: 'center top',
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(clamp(8px, 2vw, 10px))',
-          WebkitBackdropFilter: 'blur(clamp(8px, 2vw, 10px))',
-          border: '1px solid rgba(255, 215, 0, 0.1)',
-          overflow: 'hidden',
-        }}>
-          <div style={{
-            width: 'auto',
-            paddingTop: '30%', // This creates the 10:3 ratio
-            position: 'relative',
-          }}>
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-            }}>
-              <ImageCarousel
-                images={GraphicImages}
-                isBackground={false}
-                fullHeight={false}
-              />
-            </div>
-          </div>
         </div>
       </div>
 

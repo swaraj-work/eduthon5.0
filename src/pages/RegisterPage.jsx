@@ -3,6 +3,7 @@ import { FaUser, FaEnvelope, FaBriefcase, FaBuilding, FaMapMarkerAlt, FaArrowLef
 import { useParams } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 
+
 // A simple, stable input component that won't re-render unnecessarily
 const SimpleInput = ({
   id,
@@ -50,6 +51,10 @@ function RegisterPage() {
   // Route params
   const { source } = useParams();
   const isFromSponsorshipTiers = source === 'sponsor';
+
+  const spreadSheetAPi = import.meta.env.VITE_GOOGLE_SPREADSHEET_API_KEY;
+
+
 
   // Form state using a single state object
   const [formData, setFormData] = useState({
@@ -208,6 +213,26 @@ function RegisterPage() {
     }
   };
 
+  // Google Sheets update functionality
+  const updateOnSpreadsheet = async (data) => {
+    console.log("Data to be sent to Google Sheets:", data);
+    const scriptURL = spreadSheetAPi;
+
+    try {
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        body: new URLSearchParams(data),
+      });
+
+      const result = await response.text();
+      console.log("Google Sheet update result:", result);
+      return { success: true, result };
+    } catch (error) {
+      console.error("Error updating Google Sheet:", error);
+      return { success: false, error };
+    }
+  };
+
   // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -234,7 +259,7 @@ function RegisterPage() {
       // Prepare email data
       const emailData = {
         to_email: "patelswadesh7@gmail.com",
-        from_name: "Eduthon Team",
+        from_name: "Eduthon",
         subject: "New Registration from " + formData.name,
         user_name: formData.name,
         user_email: formData.email,
@@ -243,8 +268,19 @@ function RegisterPage() {
         user_city: formData.city,
       };
 
+
       // Send email without passing the event object
       const result = await sendEmail(e, emailData);
+      if (result && result.success) {
+        const resultSpreadSheet = await updateOnSpreadsheet({
+          name: formData.name,
+          email: formData.email,
+          organisation: formData.organization,
+          role: formData.role,
+          city: formData.city
+        });
+        console.log("Google Sheets update result:", resultSpreadSheet);
+      }
 
       const successMessage = document.createElement('div');
       successMessage.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/85 border border-[#D4AF37] rounded-lg p-4 text-center z-50 shadow-xl backdrop-blur-lg opacity-0 transition-all duration-300 max-w-[90%] w-64';
