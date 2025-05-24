@@ -39,12 +39,12 @@ const ImageCarousel = ({ images, isBackground = false, fullHeight = false }) => 
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-    
+
     // Set up a new interval
     intervalRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % images.length);
     }, 5000);
-    
+
     // Clean up on unmount
     return () => {
       if (intervalRef.current) {
@@ -85,30 +85,32 @@ const ImageCarousel = ({ images, isBackground = false, fullHeight = false }) => 
             }}
           />
         ))}
-        
+
         {/* Dots Navigation for Background Carousel */}
-        <div className="carousel-dots" style={{
-          position: 'absolute',
-          bottom: '10px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          gap: isMobile ? '6px' : '8px',
-          zIndex: 2,
-        }}>
-          {images.map((_, index) => (
-            <div
-              key={index}
-              style={{
-                width: isMobile ? '20px' : '25px',
-                height: isMobile ? '2px' : '3px',
-                backgroundColor: currentSlide === index ? '#FAD300' : 'rgba(255, 255, 255, 0.3)',
-                transition: 'all 0.5s ease',
-                transform: currentSlide === index ? 'scaleX(1)' : 'scaleX(1)',
-              }}
-            />
-          ))}
-        </div>
+        {!isMobile && (
+          <div className="carousel-dots" style={{
+            position: 'absolute',
+            bottom: '10px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            gap: isMobile ? '6px' : '8px',
+            zIndex: 2,
+          }}>
+            {images.map((_, index) => (
+              <div
+                key={index}
+                style={{
+                  width: isMobile ? '20px' : '25px',
+                  height: isMobile ? '2px' : '3px',
+                  backgroundColor: currentSlide === index ? '#FAD300' : 'rgba(255, 255, 255, 0.3)',
+                  transition: 'all 0.5s ease',
+                  transform: currentSlide === index ? 'scaleX(1)' : 'scaleX(1)',
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
     );
   }

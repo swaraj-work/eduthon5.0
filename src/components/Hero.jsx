@@ -9,7 +9,7 @@ const Hero = ({ onRegisterClick }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const logo = 'https://ik.imagekit.io/patelswadesh/logo.png'
   // const logo = '../src/assets/images/logo.png'
-  
+
   const GraphicImages = [
     'https://ik.imagekit.io/patelswadesh/GraphicImages/1.png',
     'https://ik.imagekit.io/patelswadesh/GraphicImages/2.png',
@@ -235,11 +235,11 @@ const Hero = ({ onRegisterClick }) => {
           <div
             className="hero-badge mx-auto w-auto"
             style={{
-              padding: isMobile 
-                ? 'clamp(0.3rem, 1.5vh, 0.4rem) clamp(0.35rem, 2vw, 0.5rem)' 
+              padding: isMobile
+                ? 'clamp(0.3rem, 1.5vh, 0.4rem) clamp(0.35rem, 2vw, 0.5rem)'
                 : 'clamp(0.35rem, 1.2vh, 0.45rem) clamp(0.6rem, 2vw, 0.8rem)',
-              margin: isMobile 
-                ? 'clamp(0.8rem, 3vh, 1.5rem) auto clamp(0.4rem, 1.5vh, 0.8rem)' 
+              margin: isMobile
+                ? 'clamp(0.8rem, 3vh, 1.5rem) auto clamp(0.4rem, 1.5vh, 0.8rem)'
                 : 'clamp(0.4rem, 1.5vh, 0.6rem) auto clamp(1rem, 3vh, 1.5rem)',
               position: 'relative',
               zIndex: 5,
@@ -278,60 +278,107 @@ const Hero = ({ onRegisterClick }) => {
             transition: 'all 0.3s ease-in-out'
           }}>
 
-            <span style={{
-              display: 'block',
-              marginTop: isMobile ? 'clamp(0.5rem, 1.5vh, 0.8rem)' : 'clamp(0.8rem, 2vh, 1rem)',
-              marginBottom: isMobile ? 'clamp(1.2rem, 3vh, 1.5rem)' : 'clamp(1.4rem, 3vh, 1.6rem)',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              padding: isMobile ? 'clamp(0.3rem, 1vh, 0.5rem)' : 'clamp(0.5rem, 1.5vh, 0.8rem)',
-              textAlign: 'center',
-              transition: 'all 0.3s ease-in-out'
+            <div style={{
+              position: 'relative',
+              margin: isMobile ? '0 auto 1.5rem' : '0 auto',
+              padding: isMobile ? '1rem 0.8rem 1.5rem' : '0',
+              borderRadius: '16px',
+              width: isMobile ? 'calc(100% - 20px)' : 'auto',
+              maxWidth: isMobile ? '480px' : 'none'
             }}>
-              <img
-                src={logo}
-                alt="EDUTHON 5.0"
-                className="mx-auto"
-                style={{
-                  height: isMobile ? 'clamp(80px, 18vw, 110px)' : 'clamp(90px, 15vw, 120px)',
-                  width: 'auto',
-                  display: 'inline-block',
-                  filter: 'drop-shadow(0 0 clamp(8px, 2vw, 12px) rgba(255, 215, 0, 0.5))',
-                  transition: 'all 0.3s ease-in-out'
-                }}
-              />
-            </span>
+              {/* Mobile Carousel - positioned underneath the logo */}
+              {isMobile && (
+                <div style={{
+                  position: 'absolute',
+                  marginTop: 'clamp(-1rem, -5vh, -1rem)',
+                  marginBottom: '0',
+                  marginLeft: 'clamp(-5rem, -10vw, -5rem)',
+                  width: '110vw',
+                  height: '100%',
+                  zIndex: 1,
+                  overflow: 'hidden',
+                  pointerEvents: 'none',
+                  borderRadius: '16px',
+                  boxShadow: '0 8px 30px rgba(0, 0, 0, 0.25)',
+                  background: 'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2))',
+                }}>
+                  <ImageCarousel
+                    images={carouselImages}
+                    isBackground={true}
+                    fullHeight={false}
+                    opacity={0.8}
+                  />
+                </div>
+              )}
+
+              {/* Logo that appears over the carousel */}
+              <div style={{ position: 'relative', zIndex: 10 }}>
+                <span style={{
+                  display: 'block',
+                  marginTop: isMobile ? 'clamp(0.5rem, 1.5vh, 0.8rem)' : 'clamp(0.8rem, 2vh, 1rem)',
+                  marginBottom: isMobile ? 'clamp(1.2rem, 3vh, 1.5rem)' : 'clamp(1.4rem, 3vh, 1.6rem)',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  padding: isMobile ? 'clamp(0.3rem, 1vh, 0.5rem)' : 'clamp(0.5rem, 1.5vh, 0.8rem)',
+                  textAlign: 'center',
+                  transition: 'all 0.3s ease-in-out',
+                  position: 'relative'
+                }}>
+                  <img
+                    src={logo}
+                    alt="EDUTHON 5.0"
+                    className="mx-auto"
+                    style={{
+                      height: isMobile ? 'clamp(100px, 22vw, 140px)' : 'clamp(90px, 15vw, 120px)',
+                      width: 'auto',
+                      display: 'inline-block',
+                      filter: isMobile ? 'drop-shadow(0 0 clamp(15px, 4vw, 25px) rgba(255, 215, 0, 0.8))' : 'drop-shadow(0 0 clamp(8px, 2vw, 12px) rgba(255, 215, 0, 0.5))',
+                      transition: 'all 0.3s ease-in-out',
+                      position: 'relative',
+                      zIndex: 10
+                    }}
+                  />
+                </span>
+              </div>
+
+            </div>
+          </h1>
+          {/* Heading text below logo */}
+          <div style={{ position: 'relative', zIndex: 10, top: 'clamp(-2rem, -5vh, -1rem)' }}>
             <span style={{
               display: 'block',
-              fontSize: isMobile ? 'clamp(1.6rem, 5vw, 2.6rem)' : 'clamp(1.7rem, 2.5vw, 2.3rem)',
+              fontSize: isMobile ? 'clamp(1.5rem, 5.5vw, 2.8rem)' : 'clamp(1.7rem, 2.5vw, 2.3rem)',
               fontWeight: 600,
               opacity: 0.95,
-              margin: isMobile 
-                ? 'clamp(0.3rem, 1vh, 0.5rem) auto clamp(0.5rem, 1.5vh, 0.8rem)' 
+              margin: isMobile
+                ? 'clamp(0rem, 1vh, 0.5rem) auto clamp(0.5rem, 1.5vh, 0.8rem)'
                 : 'clamp(0.5rem, 1.5vh, 0.8rem) auto clamp(-2.5rem, -4vh, -2rem)',
               padding: isMobile ? 'clamp(0.2rem, 0.8vh, 0.3rem) 0' : 'clamp(0.3rem, 1vh, 0.5rem) 0',
               letterSpacing: 'clamp(-0.02em, -0.01em, 0)',
               lineHeight: isMobile ? '1.2' : '1.3',
-              transition: 'all 0.3s ease-in-out'
+              transition: 'all 0.3s ease-in-out',
+              textShadow: isMobile ? '0 2px 8px rgba(0, 0, 0, 0.7)' : 'none'
             }}>
               The Next of Education: <span className="gradient-text">AI Meets Humanity</span>
             </span>
-          </h1>
-          <h2 className="font-[500] mx-auto opacity-95 max-w-[min(700px,85vw)] tracking-wider"
+          </div>
+
+          <h2 className="font-[500] mx-auto opacity-95 max-w-[min(700px,85vw)] tracking-wider mt-[clamp(-2rem,-5vh,-1rem)]"
             style={{
-              fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)',
+              fontSize: 'clamp(1.2rem, 1.6vw, 1.2rem)',
               margin: isMobile ? 'clamp(0.3rem, 1vh, 0.4rem) auto' : 'clamp(1.5rem, 3vh, 2rem) auto 0',
               lineHeight: 'clamp(1.4, 1.5, 1.6)',
-              letterSpacing: 'clamp(0.02em, 0.03em, 0.04em)'
+              letterSpacing: 'clamp(0.02em, 0.03em, 0.04em)',
+              marginTop: isMobile ? 'clamp(-2rem, -5vh, -1rem)' : 'clamp(1.5rem, 3vh, 2rem)',
             }}>
             <span className={isMobile ? "text-[clamp(1.2rem,2.5vw,1.3rem)]" : "text-[clamp(1.4rem,2.8vw,1.5rem)]"}>India's Most Influential Education Summit</span>
           </h2>
 
           <div className="glass-container hero-event-details" style={{
-            margin: isMobile 
+            margin: isMobile
               ? 'clamp(0.5rem, 2vh, 1rem) auto clamp(0.5rem, 2vh, 1rem)'
               : 'clamp(0.8rem, 2.5vh, 1.2rem) auto clamp(0.5rem, 2vh, 1rem)',
-            padding: isMobile 
+            padding: isMobile
               ? 'clamp(0.5rem, 1.5vh, 0.8rem) clamp(0.6rem, 2vw, 1rem)'
               : 'clamp(0.7rem, 2vh, 1rem) clamp(1rem, 3vw, 1.5rem)',
             maxWidth: isMobile ? 'clamp(280px, 90%, 450px)' : 'clamp(400px, 60%, 600px)',
@@ -384,10 +431,10 @@ const Hero = ({ onRegisterClick }) => {
               justifyContent: 'center',
               width: '100%',
               maxWidth: isMobile ? '400px' : '800px',
-              margin: '1rem auto',
+              margin: isMobile ? '-1rem auto 1rem' : '1rem auto',
             }}>
               {/* Register Button */}
-              <RouterLink 
+              <RouterLink
                 to="/register"
                 style={{
                   textDecoration: 'none',
