@@ -610,7 +610,7 @@ const SponsorshipTiers = () => {
               zIndex: 0
             }} />
 
-            <Link to="/register/sponsor" style={{ textDecoration: 'none', position: 'relative', zIndex: 1 }}>
+            <a href="https://forms.gle/S4ey4bQbQHV3Y4ir8" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', position: 'relative', zIndex: 1 }}>
               <motion.button
                 className="btn"
                 whileHover={{ scale: 1.05 }}
@@ -649,7 +649,7 @@ const SponsorshipTiers = () => {
                   zIndex: 1
                 }} />
               </motion.button>
-            </Link>
+            </a>
           </motion.div>
         </motion.div>
       </div>

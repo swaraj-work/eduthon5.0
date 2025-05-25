@@ -3,12 +3,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import ImageCarousel from './ImageCarousel';
 
-const Hero = ({ onRegisterClick }) => {
+const Hero = () => {
   const [isMobile, setIsMobile] = useState(false);
   const heroRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const logo = 'https://ik.imagekit.io/patelswadesh/logo.png'
-  // const logo = '../src/assets/images/logo.png'
 
   const GraphicImages = [
     'https://ik.imagekit.io/patelswadesh/GraphicImages/1.png',
@@ -434,8 +433,10 @@ const Hero = ({ onRegisterClick }) => {
               margin: isMobile ? '-1rem auto 1rem' : '1rem auto',
             }}>
               {/* Register Button */}
-              <RouterLink
-                to="/register"
+              <a
+                href="https://forms.gle/S4ey4bQbQHV3Y4ir8"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   textDecoration: 'none',
                   flex: isMobile ? '1 1 45%' : '1',
@@ -462,7 +463,7 @@ const Hero = ({ onRegisterClick }) => {
                 >
                   Register Now
                 </button>
-              </RouterLink>
+              </a>
 
               {/* Sponsor Button */}
               <div

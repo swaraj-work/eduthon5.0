@@ -21,7 +21,6 @@ import Footer from './components/Footer';
 
 // Pages
 import Highlights from './pages/Highlights';
-import RegisterPage from './pages/RegisterPage';
 import SponsorshipTiers from './pages/SponsorshipTiers';
 
 function ScrollToTop() {
@@ -207,13 +206,6 @@ function AppContent() {
     return () => observer.disconnect();
   }, []);
 
-  const handleRegisterClick = () => {
-    // Use navigate for smoother transitions
-    navigate('/register');
-  };
-
-  // No longer need form close handler since we're using separate pages
-
   // Utility function for smooth scrolling to top
   const smoothScrollToTop = () => {
     const scrollStep = -window.scrollY / 20;
@@ -370,14 +362,14 @@ function AppContent() {
 
   const HomePage = () => (
     <>
-      <Hero onRegisterClick={handleRegisterClick} />
+      <Hero />
       <Introduction />
       <WhatToExpect />
       <WhoWillAttend />
       <WhyEduthon />
       <Legacy />
-      <Sponsors onRegisterClick={handleRegisterClick} />
-      <JoinMovement onRegisterClick={handleRegisterClick} />
+      <Sponsors />
+      <JoinMovement />
       <Footer />
 
       {/* Registration form now on its own page */}
@@ -466,7 +458,6 @@ function AppContent() {
   // Check if current route is one where navbar should be hidden
   const hideNavbarRoutes = [
     '/highlights',
-    '/register',
     '/sponsorship-tiers'
   ];
 
@@ -480,8 +471,6 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/highlights" element={<Highlights />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/register/:source" element={<RegisterPage />} />
             <Route path="/sponsorship-tiers" element={<SponsorshipTiers />} />
           </Routes>
         </main>

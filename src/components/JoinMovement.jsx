@@ -1,7 +1,7 @@
 import { useInView } from 'react-intersection-observer';
 import React, { useState, useEffect } from 'react';
 
-const JoinMovement = ({ onRegisterClick }) => {
+const JoinMovement = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -164,7 +164,9 @@ const JoinMovement = ({ onRegisterClick }) => {
             position: 'relative'
           }}>
             <a 
-              href="/register"
+              href="https://forms.gle/S4ey4bQbQHV3Y4ir8"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ 
                 textDecoration: 'none',
                 width: isMobile ? '100%' : 'auto'
