@@ -94,6 +94,45 @@ const WhyEduthon = () => {
         }}>
           Not Just a Summit. A National Platform for Educational Change.
         </p>
+
+        {/* Wide Carousel Card */}
+        <div className="wide-carousel-card" style={{
+          position: 'relative',
+          width: isMobile ? '100%' :'52vw',
+          maxWidth: '1200px',
+          borderRadius: '16px',
+          marginTop: isMobile ? 'clamp(2rem, 4vh, 2.5rem)' : 'clamp(2.5rem, 3vh, 3rem)',
+          marginBottom: isMobile ? 'clamp(1rem, 2vh, 1.5rem)' : 'clamp(1rem, 2vh, 1.5rem)',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          transform: 'scale(0.95)',
+          transformOrigin: 'center top',
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          backdropFilter: 'blur(clamp(8px, 2vw, 10px))',
+          WebkitBackdropFilter: 'blur(clamp(8px, 2vw, 10px))',
+          border: '1px solid rgba(255, 215, 0, 0.1)',
+          overflow: 'hidden',
+        }}>
+          <div style={{
+            width: 'auto',
+            paddingTop: '30%', // This creates the 10:3 ratio
+            position: 'relative',
+          }}>
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            }}>
+              <ImageCarousel
+                images={GraphicImages}
+                isBackground={false}
+                fullHeight={false}
+              />
+            </div>
+          </div>
+        </div>
         
         <div className="card why-card" style={{
           maxWidth: '900px',
@@ -260,45 +299,6 @@ const WhyEduthon = () => {
               color: 'rgba(212, 175, 55, 0.3)',
             }}>
               <FaQuoteRight size={isMobile ? 16 : 20} />
-            </div>
-          </div>
-        </div>
-        
-        {/* Wide Carousel Card */}
-        <div className="wide-carousel-card" style={{
-          position: 'relative',
-          width: isMobile ? '100%' :'52vw',
-          maxWidth: '1200px',
-          borderRadius: '16px',
-          marginTop: isMobile ? 'clamp(2rem, 4vh, 2.5rem)' : 'clamp(2.5rem, 3vh, 3rem)',
-          marginBottom: isMobile ? 'clamp(1rem, 2vh, 1.5rem)' : 'clamp(1rem, 2vh, 1.5rem)',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          transform: 'scale(0.95)',
-          transformOrigin: 'center top',
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(clamp(8px, 2vw, 10px))',
-          WebkitBackdropFilter: 'blur(clamp(8px, 2vw, 10px))',
-          border: '1px solid rgba(255, 215, 0, 0.1)',
-          overflow: 'hidden',
-        }}>
-          <div style={{
-            width: 'auto',
-            paddingTop: '30%', // This creates the 10:3 ratio
-            position: 'relative',
-          }}>
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-            }}>
-              <ImageCarousel
-                images={GraphicImages}
-                isBackground={false}
-                fullHeight={false}
-              />
             </div>
           </div>
         </div>

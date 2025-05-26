@@ -74,7 +74,7 @@ const Legacy = () => {
             date: 'APR, 2022',
             title: '"Inaugural Edition"',
             description: 'with top educators, bureaucrats, and innovators.',
-            image: 'https://ik.imagekit.io/patelswadesh/legacy/legacy1.jpg',
+            image: 'https://ik.imagekit.io/patelswadesh/legacy/legacy1.jpg?updatedAt=1748252545864',
             // image: '../src/assets/images/legacy/legacy1.jpg',
             position: 'left'
         },

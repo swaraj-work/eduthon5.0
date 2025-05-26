@@ -135,7 +135,7 @@ const Hero = () => {
     'https://ik.imagekit.io/patelswadesh/FrontPage/frontpage-1.jpg',
     'https://ik.imagekit.io/patelswadesh/FrontPage/frontpage-2.jpg',
     'https://ik.imagekit.io/patelswadesh/FrontPage/frontpage-3.jpg',
-    'https://ik.imagekit.io/patelswadesh/FrontPage/frontpage-4.jpg?updatedAt=1747752938136',
+    'https://ik.imagekit.io/patelswadesh/FrontPage/frontpage-4.jpg?updatedAt=1748253239927',
     'https://ik.imagekit.io/patelswadesh/FrontPage/frontpage-5.jpg',
   ];
   // const carouselImages = [

@@ -79,7 +79,7 @@ const ImageCarousel = ({ images, isBackground = false, fullHeight = false }) => 
               transition: 'opacity 1.5s ease-in-out, filter 1.5s ease-in-out',
               backgroundImage: `linear-gradient(rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.6)), url(${image})`,
               backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundPosition: index == 3 ? 'center top' : 'center',
               filter: 'brightness(1) contrast(1)',
               zIndex: currentSlide === index ? 1 : 0,
             }}
