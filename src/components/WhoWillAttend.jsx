@@ -135,7 +135,7 @@ const WhoWillAttend = () => {
             opacity: 1,
             visibility: 'visible'
           }}>
-            The Most Influential Room in Indian Education
+            The Most Influential Room in {isMobile ? <br/> : ''}Indian Education
           </p>
         </div>
         
@@ -271,9 +271,9 @@ const WhoWillAttend = () => {
                   lineHeight: isSmallMobile ? 1.5 : isMobile ? 1.5 : 1.7,
                   textAlign: 'center',
                   flexGrow: 1,
-                  letterSpacing: '0.01em'
+                  letterSpacing: '0.01em',
                 }}>
-                  {attendee.description}
+                  {index === 3 ? <span>Thought leaders and content creators in the {isMobile ? <br /> : ''}education space</span> : attendee.description}
                 </p>
               </div>
               

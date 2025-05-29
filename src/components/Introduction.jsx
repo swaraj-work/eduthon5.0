@@ -155,7 +155,7 @@ const Introduction = () => {
                 fontWeight: 500,
                 lineHeight: 1.5
               }}>
-                Where technology empowers human potential and transforms the educational landscape
+                Where technology empowers human potential and transforms {isMobile ? <br /> : ''}the educational landscape
               </p>
             </div>
           </div>

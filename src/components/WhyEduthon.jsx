@@ -248,9 +248,9 @@ const WhyEduthon = () => {
                       fontSize: isMobile ? '0.85rem' : '0.92rem',
                       lineHeight: '1.5',
                       margin: 0,
-                      color: 'rgba(255, 255, 255, 0.9)'
+                      color: 'rgba(255, 255, 255, 0.9)',
                     }}>
-                      {reason.text}
+                      {index == 2 ? <span>Platform for diverse voices: educators, youth, {isMobile ? <br /> : ''}policymakers, entrepreneurs</span> : reason.text}
                     </p>
                   </div>
                 </div>

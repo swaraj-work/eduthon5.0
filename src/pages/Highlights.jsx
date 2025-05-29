@@ -270,7 +270,7 @@ const editions = [
     id: 4,
     title: "Chalkboard to Chatbot",
     date: "October 2024",
-    description: "With a special focus on AI and robotics in education, EDUTHON 4.0 featured journalist Saurabh Dwivedi and actress/educator Dr. Swaroop Sampat.",
+    description: "With a special focus on AI and robotics in education, EDUTHON 4.0 featured journalist Saurabh Dwivedi and actress/educator Dr. Swaroop Sampat Rawal.",
     images: imagesEduthon4,
     color: "rgb(231, 76, 60)",
     mediaCoverage: mediaEduthon4

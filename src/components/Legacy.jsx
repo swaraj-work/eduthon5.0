@@ -100,7 +100,7 @@ const Legacy = () => {
             id: 4,
             date: 'OCT, 2024',
             title: '"Chalkboard to Chatbot"',
-            description: 'featuring Dr. Swaroop Sampat and Saurabh Dwivedi',
+            description: 'featuring Dr. Swaroop Sampat Rawal and Saurabh Dwivedi',
             image: 'https://ik.imagekit.io/patelswadesh/legacy/legacy4.jpg',
             // image: '../src/assets/images/legacy/legacy4.jpg',
             position: 'right'

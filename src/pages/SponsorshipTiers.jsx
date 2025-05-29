@@ -171,7 +171,7 @@ const SponsorshipTiers = () => {
   };
 
   return (
-    <section className={`section ${isMobile ? 'mt-[-10px]' : 'mt-[-144px]'}`} style={{
+    <section className={`section ${isMobile ? 'mt-[-3rem] mb-0' : 'mt-[-144px]'}`} style={{
       backgroundColor: '#0c0c0c',
       paddingTop: isMobile ? '2rem' : '4rem',
       paddingBottom: isMobile ? '3rem' : '4rem',
@@ -234,7 +234,7 @@ const SponsorshipTiers = () => {
         width: '100%',
         height: '100%',
         zIndex: 0,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
       }}>
         <div className="particles">
           {[...Array(20)].map((_, i) => (
@@ -279,7 +279,7 @@ const SponsorshipTiers = () => {
           <motion.div variants={headerVariants} className="header-content" style={{
             position: 'relative',
             marginBottom: isMobile ? '1.2rem' : '2rem',
-            marginTop: isMobile ? '-3rem' : '2rem',
+            marginTop: isMobile ? '0rem' : '2rem',
             height: isMobile ? '200px' : '200px',
             display: 'flex',
             flexDirection: 'column',
@@ -593,7 +593,9 @@ const SponsorshipTiers = () => {
             style={{
               marginTop: '2rem',
               textAlign: 'center',
-              position: 'relative'
+              position: 'relative',
+              paddingTop: '2rem',
+              paddingBottom: '2rem',
             }}
           >
             {/* Button glow effect */}
@@ -637,7 +639,6 @@ const SponsorshipTiers = () => {
                   </svg>
                 </span>
 
-                {/* Button shine effect */}
                 <div className="shine" style={{
                   position: 'absolute',
                   top: 0,

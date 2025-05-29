@@ -417,7 +417,7 @@ const Hero = () => {
               transition: 'all 0.3s ease-in-out'
             }}>
               <FaMapMarkerAlt color="var(--secondary-color)" size={isMobile ? Math.max(18, Math.min(22, window.innerWidth * 0.05)) : Math.max(22, Math.min(26, window.innerWidth * 0.02))} />
-              <span>Hyatt, Chandigarh</span>
+              <span>Hyatt Regency, Chandigarh</span>
             </div>
           </div>
 
@@ -530,7 +530,7 @@ const Hero = () => {
           </div>
 
           <p className={`italic max-w-[800px] mx-auto mt-[0] mb-[1rem] md:mt-[1rem] opacity-85 text-[clamp(0.9rem,1.8vw,1.2rem)] px-4 leading-relaxed`}>
-            A decade-defining dialogue on technology, learning, and the soul of education.
+            A decade-defining dialogue on {isMobile ? <br /> : ''}technology, learning, and the {isMobile ? <br /> : ''}soul of education.
           </p>
         </div>
       </div>
